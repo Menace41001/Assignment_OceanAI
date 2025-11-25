@@ -4,7 +4,7 @@ An AI-powered email management system that automatically categorizes emails, ext
 
 ---
 
-## � Setup Instructions
+## 🚀 Setup Instructions
 
 ### Prerequisites
 - **Python 3.8+**
@@ -70,25 +70,43 @@ Open your browser and go to **http://localhost:5173**
 
 ---
 
-## � How to Load Mock Inbox
+## ⚡ Real-Time Email Updates
 
-The mock inbox loads **automatically** when you start the backend.
+The app automatically detects and displays new emails without manual refresh!
 
-### View/Edit Mock Data
+### How It Works
 
-The sample emails are in: `backend/data/mock_inbox.json`
+- **Backend File Watcher**: Monitors `backend/data/mock_inbox.json` for changes (checks every 2 seconds)
+- **Frontend Auto-Polling**: Fetches new emails automatically (every 3 seconds)
+- **Result**: Edit the JSON file → Save → See changes appear within 5 seconds!
 
-To customize:
-1. Edit `mock_inbox.json` with your own sample emails
-2. Restart the backend
-3. Click **"Process Inbox"** in the UI
+### Try It Now
 
-### Reset Data
+1. **Open** `backend/data/mock_inbox.json`
+2. **Add a new email** at the end (before the closing `]`):
+   ```json
+   ,
+   {
+     "id": "email_realtime_test",
+     "sender": "test@example.com",
+     "subject": "Real-Time Test Email",
+     "body": "This email will appear automatically!",
+     "timestamp": "2023-11-26T12:00:00Z",
+     "read": false
+   }
+   ```
+3. **Save the file** (Ctrl+S)
+4. **Watch your browser** - the email appears automatically within 5 seconds!
 
-To start fresh:
-1. Delete `backend/persistence.json`
-2. Restart the backend
-3. Mock data will reload automatically
+### Add Emails via API
+
+You can also add emails programmatically:
+
+```bash
+curl -X POST http://localhost:8000/emails -H "Content-Type: application/json" -d "{\"id\":\"api_test\",\"sender\":\"api@test.com\",\"subject\":\"API Email\",\"body\":\"Added via API\",\"timestamp\":\"2023-11-26T12:00:00Z\",\"read\":false}"
+```
+
+The email appears instantly!
 
 ---
 
@@ -156,7 +174,7 @@ Look for the `DEFAULT_PROMPTS` list (around line 20).
 
 ---
 
-## � Troubleshooting
+## 🔧 Troubleshooting
 
 **"Backend won't start"**
 - Check if `OPENAI_API_KEY` is set in `backend/.env`
@@ -191,14 +209,14 @@ Assignment_OceanAI/
 │   │   ├── store.py         # Data storage
 │   │   ├── processor.py     # Email processing
 │   │   ├── llm_engine.py    # OpenAI integration
-│   │   └── ingestion.py     # Mock data loader
+│   │   └── ingestion.py     # Mock data loader with file watcher
 │   ├── data/
-│   │   └── mock_inbox.json  # Sample emails
+│   │   └── mock_inbox.json  # Sample emails (auto-reloads on save)
 │   └── persistence.json     # Saved data (auto-generated)
 │
 └── frontend/
     └── src/
-        ├── App.jsx          # Main UI
+        ├── App.jsx          # Main UI (auto-polls for updates)
         └── api.js           # Backend client
 ```
 
@@ -212,13 +230,16 @@ Assignment_OceanAI/
 - ✅ Draft generation and management
 - ✅ Customizable AI prompts
 - ✅ Data persistence across restarts
-- ✅ Real-time processing updates
+- ✅ **Real-time email updates** (no refresh needed!)
+- ✅ File watcher for mock data changes
+- ✅ Auto-polling frontend
 
 ---
 
-## � Notes
+## 📝 Notes
 
 - Uses OpenAI GPT-4o model
 - All data stored in `backend/persistence.json`
-- Mock data reloads automatically on first startup
+- Mock data auto-reloads when `mock_inbox.json` changes
+- Frontend polls for updates every 3 seconds
 - CORS enabled for development (localhost only)

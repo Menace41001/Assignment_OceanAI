@@ -27,6 +27,14 @@ function App() {
     fetchEmails();
     fetchPrompts();
     fetchDrafts();
+
+    // Auto-refresh emails every 3 seconds to detect backend changes
+    const pollInterval = setInterval(() => {
+      fetchEmails();
+    }, 3000);
+
+    // Cleanup on unmount
+    return () => clearInterval(pollInterval);
   }, []);
 
   const fetchEmails = async () => {

@@ -29,7 +29,9 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
+    from services.ingestion import start_file_watcher
     load_mock_data()
+    start_file_watcher()
 
 @app.get("/")
 def read_root():
@@ -42,6 +44,12 @@ def health_check():
 @app.get("/emails", response_model=List[Email])
 def get_emails():
     return store.get_all_emails()
+
+@app.post("/emails", response_model=Email)
+def create_email(email: Email):
+    """Add a new email to the inbox"""
+    store.add_email(email)
+    return email
 
 @app.get("/emails/{email_id}", response_model=Email)
 def get_email(email_id: str):
