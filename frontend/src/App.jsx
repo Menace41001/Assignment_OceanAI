@@ -326,15 +326,15 @@ function InboxView({ emails, selectedEmail, onSelectEmail, onProcess, loading, o
                 <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <span>🤖</span> AI Assistant
                 </h3>
-
-                <div className="space-y-4 mb-4">
+                {/* Chat Messages */}
+                <div className="flex-1 overflow-y-auto space-y-4 mb-4">
                   {chatHistory.map((msg, idx) => (
                     <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      <div className={`max-w-[80%] p-4 rounded-2xl ${msg.role === 'user'
+                      <div className={`max-w-[80%] p-3 rounded-2xl ${msg.role === 'user'
                         ? 'bg-blue-600 text-white rounded-br-none'
                         : 'bg-gray-100 text-gray-800 rounded-bl-none'
                         }`}>
-                        {msg.content}
+                        <div className="whitespace-pre-wrap">{cleanText(msg.content)}</div>
                       </div>
                     </div>
                   ))}

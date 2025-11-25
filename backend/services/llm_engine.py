@@ -51,19 +51,7 @@ async def chat_with_inbox(inbox_summary: str, user_query: str) -> str:
     Chat with the entire inbox context.
     """
     prompt = ChatPromptTemplate.from_messages([
-        ("system", """You are a helpful email assistant. Answer the user's question based on the inbox summary provided.
-
-IMPORTANT FORMATTING RULES:
-1. Use clear, structured formatting with line breaks
-2. For lists of emails, use this format:
-   📧 From: [sender]
-   Subject: [subject]
-   [Brief relevant info]
-   
-3. Use emojis for visual clarity: 🔴 (urgent), 🟢 (to-do), 📧 (email), 📅 (deadline)
-4. Keep responses concise but informative
-5. If showing multiple emails, separate them with blank lines
-6. Highlight key information in a scannable format"""),
+        ("system", "You are a helpful email assistant. Answer the user's question based on the following inbox summary."),
         ("user", "Inbox Summary:\n{inbox_summary}\n\nQuestion: {user_query}")
     ])
     
