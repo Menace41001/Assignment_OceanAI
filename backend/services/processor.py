@@ -17,6 +17,12 @@ async def process_inbox():
         print("Error: Default prompts not found.")
         return
 
+    # Clear existing categories and action items to force re-processing
+    print("Clearing existing categories and action items...")
+    for email in emails:
+        email.category = None
+        email.action_items = []
+    
     for email in emails:
         try:
             print(f"Processing email: {email.id}")
@@ -29,46 +35,8 @@ async def process_inbox():
                 system_template=categorize_prompt.system_template
             )
             if category:
-                # Sanitize: extract only the category word
-                category = category.strip()
-                
-                # Define valid categories
-                valid_categories = ["Important", "To-Do", "Newsletter", "Spam"]
-                
-                # Try to find a valid category in the response
-                found_category = None
-                category_lower = category.lower()
-                
-                for valid_cat in valid_categories:
-                    if valid_cat.lower() in category_lower:
-                        found_category = valid_cat
-                        break
-                
-                if found_category:
-                    email.category = found_category
-                else:
-                    # Fallback: try to extract from common patterns
-                    for prefix in ["Category:", "category:", "The category is", "This email is", "classified as", "categorized as"]:
-                        if prefix.lower() in category_lower:
-                            # Extract text after the prefix
-                            parts = category.split(prefix, 1)
-                            if len(parts) > 1:
-                                remainder = parts[1].strip()
-                                # Check if remainder starts with a valid category
-                                for valid_cat in valid_categories:
-                                    if remainder.lower().startswith(valid_cat.lower()):
-                                        found_category = valid_cat
-                                        break
-                                if found_category:
-                                    break
-                    
-                    if found_category:
-                        email.category = found_category
-                    else:
-                        # Last resort: take first word and capitalize
-                        first_word = category.split()[0] if category.split() else category
-                        first_word = first_word.strip('"\'.,!?:')
-                        email.category = first_word.capitalize()
+                # Use the LLM response directly without validation
+                email.category = category.strip()
                 
             # Extract action items ONLY for To-Do and Important emails
             if email.category in ["To-Do", "Important"]:
@@ -110,43 +78,8 @@ async def process_single_email(email_id: str):
             system_template=categorize_prompt.system_template
         )
         if category:
-            # Sanitize: extract only the category word
-            category = category.strip()
-            
-            # Define valid categories
-            valid_categories = ["Important", "To-Do", "Newsletter", "Spam"]
-            
-            # Try to find a valid category in the response
-            found_category = None
-            category_lower = category.lower()
-            
-            for valid_cat in valid_categories:
-                if valid_cat.lower() in category_lower:
-                    found_category = valid_cat
-                    break
-            
-            if found_category:
-                email.category = found_category
-            else:
-                # Fallback: try to extract from common patterns
-                for prefix in ["Category:", "category:", "The category is", "This email is", "classified as", "categorized as"]:
-                    if prefix.lower() in category_lower:
-                        parts = category.split(prefix, 1)
-                        if len(parts) > 1:
-                            remainder = parts[1].strip()
-                            for valid_cat in valid_categories:
-                                if remainder.lower().startswith(valid_cat.lower()):
-                                    found_category = valid_cat
-                                    break
-                            if found_category:
-                                break
-                
-                if found_category:
-                    email.category = found_category
-                else:
-                    first_word = category.split()[0] if category.split() else category
-                    first_word = first_word.strip('"\'.,!?:')
-                    email.category = first_word.capitalize()
+            # Use the LLM response directly without validation
+            email.category = category.strip()
 
     # Extract action items ONLY for To-Do and Important emails
     if email.category in ["To-Do", "Important"]:

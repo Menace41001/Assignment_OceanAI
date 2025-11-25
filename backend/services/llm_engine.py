@@ -20,10 +20,14 @@ llm = ChatOpenAI(model="gpt-4o", openai_api_key=OPENAI_API_KEY, temperature=0)
 async def process_email_with_prompt(email_content: str, prompt_template: str, output_json: bool = False, system_template: str = None) -> Any:
     """
     Process an email using a specific prompt template.
-    Uses system_template if provided (for backend), otherwise uses prompt_template.
+    Combines system_template (formatting rules) with user template (categorization logic).
     """
-    # Use system_template if provided, otherwise use the user-facing template
-    actual_template = system_template if system_template else prompt_template
+    # Combine both templates: system rules + user logic
+    if system_template:
+        # Use system template for formatting rules, append user template for custom logic
+        actual_template = system_template + "\n\nAdditional Instructions:\n" + prompt_template
+    else:
+        actual_template = prompt_template
     
     prompt = ChatPromptTemplate.from_template(actual_template + "\n\nEmail Content:\n{email_content}")
     

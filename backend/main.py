@@ -77,9 +77,15 @@ async def trigger_ingest():
     return {"message": "Ingestion triggered"}
 
 @app.post("/process")
-async def trigger_process(background_tasks: BackgroundTasks):
-    background_tasks.add_task(process_inbox)
-    return {"message": "Inbox processing started in background"}
+async def trigger_process():
+    print("=" * 50)
+    print("PROCESS INBOX TRIGGERED")
+    print("=" * 50)
+    await process_inbox()
+    print("=" * 50)
+    print("PROCESS INBOX COMPLETED")
+    print("=" * 50)
+    return {"message": "Inbox processing completed"}
 
 @app.post("/process/{email_id}")
 async def trigger_process_email(email_id: str):
