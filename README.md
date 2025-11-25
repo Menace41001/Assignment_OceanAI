@@ -9,7 +9,7 @@ An AI-powered email management system that automatically categorizes emails, ext
 ### Prerequisites
 - **Python 3.8+**
 - **Node.js 16+**
-- **OpenAI API Key** ([Get one here](https://platform.openai.com/api-keys))
+- **OpenAI API Key** 
 
 ### Step 1: Install Backend Dependencies
 
