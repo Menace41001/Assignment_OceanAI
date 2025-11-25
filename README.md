@@ -1,28 +1,70 @@
 # Email Productivity Agent
 
 ## Overview
-An intelligent, prompt-driven Email Productivity Agent capable of processing an inbox, categorizing emails, extracting action items, and generating draft replies using LLMs.
+This project is an intelligent, prompt-driven Email Productivity Agent designed to streamline email management. It leverages Large Language Models (LLMs) to automatically categorize emails, extract actionable tasks, and generate context-aware draft replies. The system features a modern React-based frontend and a robust FastAPI backend.
 
-## Project Structure
-- `backend/`: FastAPI application handling email processing, storage, and LLM integration.
-- `frontend/`: React + Vite application providing the user interface.
+## Key Features
+
+### 1. Email Ingestion & Management
+- **Mock Inbox**: Loads a diverse set of sample emails (Meeting requests, Newsletters, Spam, etc.) from a JSON source.
+- **Inbox View**: Displays emails with sender, subject, timestamp, and status (read/unread).
+
+### 2. Intelligent Processing (LLM-Powered)
+- **Auto-Categorization**: Automatically tags emails as *Important*, *Newsletter*, *Spam*, or *To-Do* based on content.
+- **Action Item Extraction**: Identifies and extracts specific tasks and deadlines from email bodies.
+- **Background Processing**: Uses asynchronous background tasks to process the inbox without blocking the UI.
+
+### 3. Email Agent Chat
+- **RAG-like Interaction**: Chat with specific emails to ask questions like "Summarize this" or "What are the key dates?".
+- **Context Awareness**: The agent understands the specific email context when answering.
+
+### 4. Drafts Management (New!)
+- **Create & Edit**: Full-featured editor to create new drafts or edit existing ones.
+- **Draft Reply**: Instantly create a reply draft from any email in the inbox.
+- **Save & Persist**: Drafts are saved to the backend store.
+
+### 5. AI Draft Generation (New!)
+- **AI Writer**: Generate professional email drafts by simply providing instructions (e.g., "Polite refusal", "Accept and ask for agenda").
+- **Contextual**: The AI uses the original email content to generate relevant replies.
+
+### 6. Prompt Configuration ("Brain")
+- **Customizable Logic**: View and edit the system prompts used for categorization, extraction, and drafting.
+- **Real-time Updates**: Changes to prompts take effect immediately for subsequent processing.
+
+## Technical Implementation
+
+### Backend (`backend/`)
+- **Framework**: FastAPI (Python)
+- **LLM Integration**: LangChain + Google Gemini (gemini-2.5-flash)
+- **Concurrency**: Fully async/await architecture with `BackgroundTasks` for non-blocking operations.
+- **Data Store**: In-memory storage (simulated database) with Pydantic models for validation.
+- **API**: RESTful endpoints for emails, prompts, drafts, and chat.
+
+### Frontend (`frontend/`)
+- **Framework**: React + Vite
+- **Styling**: TailwindCSS (v4) for a modern, responsive design.
+- **Architecture**: Component-based (InboxView, DraftsView, BrainView).
+- **State Management**: React Hooks (`useState`, `useEffect`) for real-time UI updates.
 
 ## Setup Instructions
 
 ### Prerequisites
 - Node.js & npm
 - Python 3.10+
-- OpenAI API Key (Set as `OPENAI_API_KEY` environment variable)
+- Google API Key (Set as `GOOGLE_API_KEY` environment variable in `backend/.env`)
 
 ### Backend Setup
 1. Navigate to the backend directory:
    ```bash
    cd backend
    ```
-2. Create a virtual environment (optional but recommended):
+2. Create virtual environment:
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   # Windows
+   venv\Scripts\activate
+   # Mac/Linux
+   source venv/bin/activate
    ```
 3. Install dependencies:
    ```bash
@@ -32,9 +74,9 @@ An intelligent, prompt-driven Email Productivity Agent capable of processing an 
    ```bash
    uvicorn main:app --reload
    ```
-   The API will be available at `http://localhost:8000`.
+   Server runs at `http://localhost:8000`.
 
-### Frontend Setup (React/Vite)
+### Frontend Setup
 1. Navigate to the frontend directory:
    ```bash
    cd frontend
@@ -47,14 +89,12 @@ An intelligent, prompt-driven Email Productivity Agent capable of processing an 
    ```bash
    npm run dev
    ```
-   The UI will be available at `http://localhost:5173` (or similar port).
+   UI runs at `http://localhost:5173`.
 
-## Usage
-1. **Load Inbox**: The mock inbox is loaded automatically by the backend.
-2. **Process Inbox**: Click "Process Inbox" in the sidebar to categorize emails and extract actions.
-3. **View Emails**: Select an email from the list to view details and AI insights.
-4. **Chat**: Use the "AI Assistant" section in the email detail view to ask questions or draft replies.
-5. **Configure Prompts**: Go to "Prompt Brain" to edit the agent's instructions.
-
-## Mock Data
-The mock inbox is located at `backend/data/mock_inbox.json`. You can edit this file to test different scenarios.
+## Usage Guide
+1. **Start**: Run both backend and frontend servers.
+2. **Ingest**: The app loads mock data on startup.
+3. **Process**: Click **"Process Inbox"** to run AI categorization. This runs in the background.
+4. **Interact**: Click an email to view details. Use the **Chat** to ask questions.
+5. **Draft**: Click **"Draft Reply"** to switch to the Drafts tab. Use the **AI Writer** to generate text, then edit and **Save**.
+6. **Configure**: Go to **"Prompt Config"** to tweak the AI's behavior.

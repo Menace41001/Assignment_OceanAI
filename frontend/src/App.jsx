@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import api from './api';
 
+const cleanText = (text) => {
+  if (!text) return "";
+  // Remove HTML tags
+  text = text.replace(/<[^>]*>/g, '');
+  // Remove Markdown bold/italic (**, *, __, _)
+  text = text.replace(/\*\*/g, '');
+  text = text.replace(/\*/g, '');
+  text = text.replace(/__/g, '');
+  text = text.replace(/_/g, '');
+  return text;
+};
+
 function App() {
   const [activeTab, setActiveTab] = useState('inbox');
   const [emails, setEmails] = useState([]);
@@ -48,11 +60,25 @@ function App() {
     setLoading(true);
     try {
       await api.post('/process');
+
+      // Poll for updates every 2 seconds for up to 30 seconds
+      let pollCount = 0;
+      const maxPolls = 15;
+      const pollInterval = setInterval(async () => {
+        await fetchEmails();
+        pollCount++;
+        if (pollCount >= maxPolls) {
+          clearInterval(pollInterval);
+          setLoading(false);
+        }
+      }, 2000);
+
+      // Also fetch immediately
       await fetchEmails();
     } catch (err) {
       console.error("Error processing", err);
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -152,7 +178,7 @@ function InboxView({ emails, selectedEmail, onSelectEmail, onProcess, loading, o
   }, [selectedEmail?.id]);
 
   const handleChat = async () => {
-    if (!selectedEmail || !chatQuery.trim()) return;
+    if (!chatQuery.trim()) return;
 
     const query = chatQuery;
     setChatQuery('');
@@ -162,7 +188,7 @@ function InboxView({ emails, selectedEmail, onSelectEmail, onProcess, loading, o
     try {
       const res = await api.post('/chat', {
         query: query,
-        email_id: selectedEmail.id
+        email_id: selectedEmail?.id || null
       });
       setChatHistory(prev => [...prev, { role: 'agent', content: res.data.response }]);
     } catch (err) {
@@ -214,8 +240,8 @@ function InboxView({ emails, selectedEmail, onSelectEmail, onProcess, loading, o
                   {new Date(email.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                 </span>
               </div>
-              <div className="text-sm font-medium text-gray-800 mb-1 truncate">{email.subject}</div>
-              <div className="text-xs text-gray-500 line-clamp-2 mb-3">{email.body}</div>
+              <div className="text-sm font-medium text-gray-800 mb-1 truncate">{cleanText(email.subject)}</div>
+              <div className="text-xs text-gray-500 line-clamp-2 mb-3">{cleanText(email.body)}</div>
 
               <div className="flex flex-wrap gap-2">
                 {email.category && (
@@ -239,8 +265,15 @@ function InboxView({ emails, selectedEmail, onSelectEmail, onProcess, loading, o
             <div className="flex-1 overflow-y-auto p-8">
               {/* Header */}
               <div className="mb-8">
-                <div className="flex items-start justify-between mb-4">
-                  <h1 className="text-2xl font-bold text-gray-900 leading-tight">{selectedEmail.subject}</h1>
+                <div className="flex items-center gap-3 mb-4">
+                  <button
+                    onClick={() => onSelectEmail(null)}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    title="Back to Inbox Assistant"
+                  >
+                    <span className="text-xl">←</span>
+                  </button>
+                  <h1 className="text-2xl font-bold text-gray-900 leading-tight flex-1">{selectedEmail.subject}</h1>
                   {selectedEmail.category && <Badge category={selectedEmail.category} size="lg" />}
                 </div>
 
@@ -263,7 +296,7 @@ function InboxView({ emails, selectedEmail, onSelectEmail, onProcess, loading, o
 
               {/* Body */}
               <div className="text-gray-800 whitespace-pre-wrap mb-8 leading-relaxed text-base">
-                {selectedEmail.body}
+                {cleanText(selectedEmail.body)}
               </div>
 
               {/* Action Items */}
@@ -335,11 +368,57 @@ function InboxView({ emails, selectedEmail, onSelectEmail, onProcess, loading, o
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex flex-col items-center justify-center text-gray-400 bg-gray-50/30">
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6 text-4xl">
-              📩
+          <div className="flex-1 flex flex-col h-full overflow-hidden bg-gray-50/30">
+            <div className="flex-1 flex flex-col items-center justify-center text-gray-400 p-8 text-center">
+              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6 text-4xl">
+                🧠
+              </div>
+              <h2 className="text-xl font-bold text-gray-700 mb-2">Inbox Assistant</h2>
+              <p className="text-gray-500 max-w-md mb-8">
+                Ask questions about your entire inbox, like "What are my deadlines?" or "Show me urgent emails".
+              </p>
             </div>
-            <p className="text-lg font-medium text-gray-500">Select an email to view details</p>
+
+            {/* Inbox Chat Section */}
+            <div className="p-8 border-t border-gray-100 bg-white">
+              <div className="space-y-4 mb-4 max-h-60 overflow-y-auto">
+                {chatHistory.map((msg, idx) => (
+                  <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[80%] p-4 rounded-2xl ${msg.role === 'user'
+                      ? 'bg-blue-600 text-white rounded-br-none'
+                      : 'bg-gray-100 text-gray-800 rounded-bl-none'
+                      }`}>
+                      {msg.content}
+                    </div>
+                  </div>
+                ))}
+                {chatLoading && (
+                  <div className="flex justify-start">
+                    <div className="bg-gray-50 text-gray-500 p-4 rounded-2xl rounded-bl-none italic">
+                      Thinking...
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex gap-3">
+                <input
+                  type="text"
+                  value={chatQuery}
+                  onChange={(e) => setChatQuery(e.target.value)}
+                  placeholder="Ask about your inbox..."
+                  className="flex-1 p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                  onKeyPress={(e) => e.key === 'Enter' && handleChat()}
+                />
+                <button
+                  onClick={handleChat}
+                  disabled={chatLoading || !chatQuery.trim()}
+                  className="bg-blue-600 text-white px-6 rounded-xl font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Send
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -349,13 +428,13 @@ function InboxView({ emails, selectedEmail, onSelectEmail, onProcess, loading, o
 
 function Badge({ category, size = 'sm' }) {
   const styles = {
-    'Important': 'bg-orange-100 text-orange-700 border-orange-200',
-    'Newsletter': 'bg-purple-100 text-purple-700 border-purple-200',
-    'To-Do': 'bg-green-100 text-green-700 border-green-200',
-    'Spam': 'bg-red-100 text-red-700 border-red-200',
+    'To-Do': 'bg-green-100 text-green-700 border-green-300',
+    'Newsletter': 'bg-purple-100 text-purple-700 border-purple-300',
+    'Spam': 'bg-red-100 text-red-700 border-red-300',
+    'Important': 'bg-orange-100 text-orange-700 border-orange-300',
   };
 
-  const defaultStyle = 'bg-gray-100 text-gray-700 border-gray-200';
+  const defaultStyle = 'bg-blue-100 text-blue-700 border-blue-300';
   const style = styles[category] || defaultStyle;
   const sizeClass = size === 'lg' ? 'px-4 py-1.5 text-sm' : 'px-2.5 py-0.5 text-xs';
 
@@ -406,6 +485,18 @@ function DraftsView({ drafts, onUpdate, activeDraft, setActiveDraft, emails }) {
       console.error("Error generating draft", err);
     }
     setGenerating(false);
+  };
+
+  const handleDelete = async () => {
+    if (!editingDraft || !window.confirm('Are you sure you want to delete this draft?')) return;
+    try {
+      await api.delete(`/drafts/${editingDraft.id}`);
+      await onUpdate();
+      setActiveDraft(null);
+      setEditingDraft(null);
+    } catch (err) {
+      console.error("Error deleting draft", err);
+    }
   };
 
   return (
@@ -459,6 +550,12 @@ function DraftsView({ drafts, onUpdate, activeDraft, setActiveDraft, emails }) {
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-900">Edit Draft</h2>
                 <div className="flex gap-3">
+                  <button
+                    onClick={handleDelete}
+                    className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-red-200"
+                  >
+                    Delete
+                  </button>
                   <button
                     onClick={() => setEditingDraft(null)}
                     className="px-4 py-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors"

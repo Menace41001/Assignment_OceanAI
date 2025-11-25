@@ -5,7 +5,7 @@ from models import Email, PromptConfig, Draft, GenerateDraftRequest
 from services.store import store
 from services.ingestion import load_mock_data
 from services.processor import process_inbox, process_single_email
-from services.llm_engine import chat_with_email, generate_draft_reply
+from services.llm_engine import chat_with_email, generate_draft_reply, chat_with_inbox
 from models import ChatRequest
 
 app = FastAPI(title="Email Productivity Agent API")
@@ -75,8 +75,21 @@ async def chat_endpoint(request: ChatRequest):
         response = await chat_with_email(email.body, request.query)
         return {"response": response}
     else:
-        # Chat with whole inbox (future scope or simple implementation)
-        return {"response": "Global inbox chat not implemented yet. Please select an email."}
+        # Chat with whole inbox
+        emails = store.get_all_emails()
+        # Construct a summary context
+        inbox_summary = "Inbox Overview:\n"
+        for email in emails:
+            inbox_summary += f"- From: {email.sender}, Subject: {email.subject}, Category: {email.category or 'Uncategorized'}\n"
+            if email.summary:
+                inbox_summary += f"  Summary: {email.summary}\n"
+            elif len(email.body) < 200:
+                inbox_summary += f"  Body: {email.body}\n"
+            else:
+                inbox_summary += f"  Body Preview: {email.body[:200]}...\n"
+        
+        response = await chat_with_inbox(inbox_summary, request.query)
+        return {"response": response}
 
 @app.get("/drafts", response_model=List[Draft])
 def get_drafts():
@@ -93,6 +106,15 @@ def update_draft(draft_id: str, draft: Draft):
         raise HTTPException(status_code=400, detail="Draft ID mismatch")
     store.save_draft(draft)
     return draft
+
+@app.delete("/drafts/{draft_id}")
+def delete_draft(draft_id: str):
+    # Add delete method to store
+    if store.drafts.get(draft_id):
+        del store.drafts[draft_id]
+        store.save_to_disk()
+        return {"message": "Draft deleted"}
+    raise HTTPException(status_code=404, detail="Draft not found")
 
 @app.post("/drafts/generate")
 async def generate_draft(request: GenerateDraftRequest):

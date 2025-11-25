@@ -3,7 +3,7 @@
     "id": "email_001",
     "sender": "sarah.jenkins@oceanai.com",
     "subject": "Q4 Product Roadmap - Final Review Required",
-    "body": "Hi Team,\n\nI've attached the final draft of the Q4 Product Roadmap for your review. We have some ambitious goals this quarter, particularly around the integration of the new LLM engine and the real-time analytics dashboard.\n\nKey highlights include:\n1. **LLM Integration:** We aim to support GPT-4 and Gemini 1.5 Pro by mid-November. This will require significant changes to our backend infrastructure to handle the increased token limits and context windows.\n2. **Analytics Dashboard:** The new dashboard needs to be live by December 1st. Please ensure the data pipeline is robust enough to handle the expected 10x increase in event volume.\n3. **Mobile App:** The beta release is scheduled for late December. We need to finalize the UI/UX designs by next week.\n\nPlease provide your feedback by EOD Thursday. We have a stakeholder meeting on Friday morning where we will present this plan.\n\nBest Regards,\nSarah Jenkins\nVP of Product",
+    "body": "Hi Team,\n\nI've attached the final draft of the Q4 Product Roadmap for your review. We have some ambitious goals this quarter, particularly around the integration of the new LLM engine and the real-time analytics dashboard.\n\nKey highlights include:\n1. LLM Integration: We aim to support GPT-4 and Gemini 1.5 Pro by mid-November. This will require significant changes to our backend infrastructure to handle the increased token limits and context windows.\n2. Analytics Dashboard: The new dashboard needs to be live by December 1st. Please ensure the data pipeline is robust enough to handle the expected 10x increase in event volume.\n3. Mobile App: The beta release is scheduled for late December. We need to finalize the UI/UX designs by next week.\n\nPlease provide your feedback by EOD Thursday. We have a stakeholder meeting on Friday morning where we will present this plan.\n\nBest Regards,\nSarah Jenkins\nVP of Product",
     "timestamp": "2023-10-27T08:00:00Z",
     "read": false
   },
@@ -25,25 +25,25 @@
   },
   {
     "id": "email_004",
-    "sender": "hr-benefits@oceanai.com",
-    "subject": "IMPORTANT: 2024 Benefits Open Enrollment - Action Required",
-    "body": "Dear Employee,\n\nWelcome to the 2024 Open Enrollment period! This is your annual opportunity to review and make changes to your benefits elections for the upcoming year. Open enrollment begins on November 1st and ends on November 15th.\n\n**What's New for 2024:**\n- **Medical Plans:** We are introducing a new High Deductible Health Plan (HDHP) with a Health Savings Account (HSA) employer match.\n- **Dental:** Orthodontia coverage has been increased to $2,500 lifetime maximum.\n- **Wellness Program:** Earn up to $500 in rewards by completing health assessments and participating in wellness challenges.\n\n**Action Required:**\nEven if you do not plan to make changes, you MUST log in to the benefits portal to confirm your current elections. Failure to do so may result in a default to the basic plan.\n\nWebinar sessions explaining the new options will be held on Oct 30th and Nov 2nd. Links are available on the company intranet.\n\nRegards,\nHR Benefits Team",
-    "timestamp": "2023-10-27T10:00:00Z",
-    "read": false
+    "sender": "newsletter@technews.io",
+    "subject": "The Week in AI: GPT-5 Rumors, NVIDIA's New Chip, and Ethics in AI",
+    "body": "Happy Friday! Here is your weekly digest of the most important news in Artificial Intelligence.\n\n1. GPT-5 Rumors Swirl\nSources suggest that OpenAI is gearing up for the training run of GPT-5. Speculation points to a massive increase in parameter count and multimodal capabilities that could blur the line between text, image, and video generation.\n\n2. NVIDIA Announces H200 GPU\nNVIDIA has unveiled its latest AI accelerator, the H200. Boasting 141GB of HBM3e memory, it promises to speed up LLM inference by up to 2x compared to the H100. This could be a game-changer for running large models on fewer devices.\n\n3. The Debate on AI Ethics Continues\nA new paper published by researchers at Stanford highlights the growing bias in generative models. The study calls for stricter regulations and transparency in training data curation.\n\nDeep Dive:\nCheck out our blog post on 'How to Fine-tune Llama-2 on your own data' - a step-by-step guide for developers.\n\nRead the full stories on our website.\n\n- The TechNews Team",
+    "timestamp": "2023-10-27T10:30:00Z",
+    "read": true
   },
   {
     "id": "email_005",
-    "sender": "newsletter@technews.io",
-    "subject": "The Week in AI: GPT-5 Rumors, NVIDIA's New Chip, and Ethics in AI",
-    "body": "Happy Friday! Here is your weekly digest of the most important news in Artificial Intelligence.\n\n**1. GPT-5 Rumors Swirl**\nSources suggest that OpenAI is gearing up for the training run of GPT-5. Speculation points to a massive increase in parameter count and multimodal capabilities that could blur the line between text, image, and video generation.\n\n**2. NVIDIA Announces H200 GPU**\nNVIDIA has unveiled its latest AI accelerator, the H200. Boasting 141GB of HBM3e memory, it promises to speed up LLM inference by up to 2x compared to the H100. This could be a game-changer for running large models on fewer devices.\n\n**3. The Debate on AI Ethics Continues**\nA new paper published by researchers at Stanford highlights the growing bias in generative models. The study calls for stricter regulations and transparency in training data curation.\n\n**Deep Dive:**\nCheck out our blog post on 'How to Fine-tune Llama-2 on your own data' - a step-by-step guide for developers.\n\nRead the full stories on our website.\n\n- The TechNews Team",
-    "timestamp": "2023-10-27T10:30:00Z",
-    "read": true
+    "sender": "noreply@spam-deals.xyz",
+    "subject": "🎉 CONGRATULATIONS! You've Won $1,000,000! Claim Now!",
+    "body": "DEAR WINNER,\n\nCONGRATULATIONS! You have been selected as the GRAND PRIZE WINNER of our international lottery! Your email address was randomly chosen from millions of entries.\n\nPRIZE AMOUNT: $1,000,000 USD\n\nTo claim your prize, simply click the link below and provide your bank account details for immediate transfer. This offer expires in 24 hours!\n\n>>> CLAIM YOUR PRIZE NOW <<<\n\nDon't miss this once-in-a-lifetime opportunity!\n\nBest Regards,\nInternational Lottery Commission",
+    "timestamp": "2023-10-27T11:00:00Z",
+    "read": false
   },
   {
     "id": "email_006",
     "sender": "alex.rivera@client-corp.com",
     "subject": "Feedback on Beta Testing - Critical Issues Found",
-    "body": "Hello OceanAI Team,\n\nWe've been testing the beta version of your new API for the past week. While the performance is impressive, we've encountered several critical issues that are blocking our integration.\n\n**Issues:**\n1. **Rate Limiting:** We are hitting the rate limit (429 Too Many Requests) way before the documented threshold of 1000 req/min. It seems to trigger around 300 req/min.\n2. **Authentication:** The OAuth2 token refresh flow fails intermittently with a 500 Internal Server Error. This forces us to manually re-authenticate, which is not viable for our background workers.\n3. **Data Consistency:** The 'getUserProfile' endpoint sometimes returns stale data immediately after a 'updateUserProfile' call. Is there a caching layer we need to be aware of?\n\nWe need these resolved before we can proceed with the full rollout to our user base. Can we schedule a call to debug this together?\n\nBest,\nAlex Rivera\nCTO, Client Corp",
+    "body": "Hello OceanAI Team,\n\nWe've been testing the beta version of your new API for the past week. While the performance is impressive, we've encountered several critical issues that are blocking our integration.\n\nIssues:\n1. Rate Limiting: We are hitting the rate limit (429 Too Many Requests) way before the documented threshold of 1000 req/min. It seems to trigger around 300 req/min.\n2. Authentication: The OAuth2 token refresh flow fails intermittently with a 500 Internal Server Error. This forces us to manually re-authenticate, which is not viable for our background workers.\n3. Data Consistency: The 'getUserProfile' endpoint sometimes returns stale data immediately after a 'updateUserProfile' call. Is there a caching layer we need to be aware of?\n\nWe need these resolved before we can proceed with the full rollout to our user base. Can we schedule a call to debug this together?\n\nBest,\nAlex Rivera\nCTO, Client Corp",
     "timestamp": "2023-10-27T11:15:00Z",
     "read": false
   },
@@ -51,48 +51,48 @@
     "id": "email_007",
     "sender": "notifications@jira.oceanai.com",
     "subject": "[JIRA] (FE-402) Bug: Dropdown menu not closing on mobile",
-    "body": "Issue FE-402 has been updated.\n\n**Summary:** Dropdown menu not closing on mobile devices when clicking outside.\n**Priority:** High\n**Assignee:** John Doe\n**Status:** In Progress -> Code Review\n\n**Comments:**\n*Jane Smith:* \"I've pushed a fix for this. The issue was related to the event listener not being attached to the document body correctly in the mobile view. I've also added a unit test to cover this scenario.\"\n\n*John Doe:* \"Thanks Jane. I'll review the PR shortly. Did you check if this affects the tablet layout as well?\"\n\n*Jane Smith:* \"Yes, tested on iPad and Galaxy Tab, works fine.\"\n\nView issue in JIRA: https://jira.oceanai.com/browse/FE-402",
+    "body": "Issue FE-402 has been updated.\n\nSummary: Dropdown menu not closing on mobile devices when clicking outside.\nPriority: High\nAssignee: John Doe\nStatus: In Progress -> Code Review\n\nComments:\nJane Smith: \"I've pushed a fix for this. The issue was related to the event listener not being attached to the document body correctly in the mobile view. I've also added a unit test to cover this scenario.\"\n\nJohn Doe: \"Thanks Jane. I'll review the PR shortly. Did you check if this affects the tablet layout as well?\"\n\nJane Smith: \"Yes, tested on iPad and Galaxy Tab, works fine.\"\n\nView issue in JIRA: https://jira.oceanai.com/browse/FE-402",
     "timestamp": "2023-10-27T11:45:00Z",
     "read": false
   },
   {
     "id": "email_008",
-    "sender": "security@oceanai.com",
-    "subject": "Security Training Reminder - Due in 3 Days",
-    "body": "Hi Team,\n\nThis is a reminder that the mandatory annual Security Awareness Training is due in 3 days (Oct 30th).\n\nCurrently, our completion rate is at 65%. It is critical that everyone completes this training to ensure we remain compliant with SOC2 and ISO27001 standards.\n\nThe training covers:\n- Phishing awareness\n- Password hygiene\n- Data classification\n- Physical security\n\nPlease log in to the Learning Management System (LMS) to complete the modules. It should take approximately 45 minutes.\n\nIf you have already completed it, please disregard this message.\n\nSecurity Team",
-    "timestamp": "2023-10-27T12:00:00Z",
+    "sender": "marketing@cloudservices.com",
+    "subject": "☁️ Limited Time Offer: 50% Off Cloud Storage for 6 Months!",
+    "body": "Hello,\n\nDon't miss out on our biggest sale of the year! Get 50% off all cloud storage plans for the first 6 months.\n\nWhy choose CloudServices?\n✓ 99.99% uptime guarantee\n✓ Military-grade encryption\n✓ 24/7 customer support\n✓ Easy migration tools\n\nPlans starting at just $4.99/month (regularly $9.99)\n\nOffer valid until October 31st. Use code: CLOUD50\n\n[SIGN UP NOW]\n\nAlready a customer? Refer a friend and get 1 month free!\n\nBest regards,\nCloudServices Marketing Team\n\nUnsubscribe | Privacy Policy",
+    "timestamp": "2023-10-27T12:30:00Z",
     "read": false
   },
   {
     "id": "email_009",
-    "sender": "lisa.wong@marketing-agency.com",
-    "subject": "Proposal: Q1 Marketing Campaign Strategy",
-    "body": "Hi Marketing Team,\n\nFollowing our brainstorming session last week, we have put together a comprehensive proposal for the Q1 Marketing Campaign. The theme is 'Empowering Intelligence'.\n\n**Campaign Components:**\n1. **Social Media Blitz:** A coordinated series of short video clips featuring customer success stories, to be shared on LinkedIn, Twitter, and YouTube Shorts.\n2. **Webinar Series:** Three deep-dive webinars focusing on specific use cases of your platform (e.g., 'AI for Finance', 'AI for Healthcare').\n3. **Whitepaper:** A thought leadership piece on 'The Future of Agentic AI', co-authored with industry experts.\n4. **Paid Search:** Targeted Google Ads campaign focusing on high-intent keywords.\n\n**Budget Breakdown:**\n- Content Production: $15,000\n- Ad Spend: $25,000\n- Webinar Hosting & Promotion: $5,000\n- Total: $45,000\n\nPlease find the detailed slide deck attached. We are excited to hear your thoughts!\n\nBest,\nLisa Wong\nAccount Manager",
-    "timestamp": "2023-10-27T13:30:00Z",
-    "read": true
+    "sender": "ceo@oceanai.com",
+    "subject": "URGENT: All-Hands Meeting Tomorrow at 10 AM",
+    "body": "Team,\n\nI need everyone to attend an all-hands meeting tomorrow (Friday) at 10 AM sharp. This is mandatory.\n\nWe have a critical announcement regarding our Series B funding round and some organizational changes that will affect everyone.\n\nPlease clear your calendars. The meeting will be in the main auditorium and streamed via Zoom for remote employees.\n\nSee you there.\n\nRobert\nCEO, OceanAI",
+    "timestamp": "2023-10-27T13:00:00Z",
+    "read": false
   },
   {
     "id": "email_010",
-    "sender": "system-monitor@oceanai.com",
-    "subject": "[INFO] Weekly Cloud Cost Report",
-    "body": "Weekly Cloud Cost Report\nPeriod: Oct 20 - Oct 26\n\n**Total Cost:** $12,450 (+5% vs last week)\n\n**Top Spenders:**\n1. **EC2 (Compute):** $8,200. Increase due to new GPU instances for model training.\n2. **RDS (Database):** $2,100. Stable.\n3. **S3 (Storage):** $900. Slight increase due to log retention.\n4. **Data Transfer:** $850.\n\n**Recommendations:**\n- We have 5 idle EC2 instances in the 'dev' environment. Consider terminating them to save ~$200/week.\n- 20% of our S3 data is infrequently accessed. Moving it to S3-IA could save ~$100/month.\n\nView full report in Cloud Console.",
+    "sender": "updates@github.com",
+    "subject": "GitHub Security Alert: Dependabot found 3 vulnerabilities",
+    "body": "Dependabot found 3 new vulnerabilities affecting oceanai/backend-api\n\nHigh severity:\n• lodash (4.17.15) - Prototype Pollution\n  Upgrade to 4.17.21 or later\n\nModerate severity:\n• axios (0.21.1) - Server-Side Request Forgery\n  Upgrade to 0.21.2 or later\n\n• express (4.17.1) - Open Redirect\n  Upgrade to 4.18.2 or later\n\nView details and create pull requests:\nhttps://github.com/oceanai/backend-api/security/dependabot\n\nYou're receiving this because you're watching this repository.",
     "timestamp": "2023-10-27T14:00:00Z",
     "read": false
   },
   {
     "id": "email_011",
-    "sender": "recruiting@oceanai.com",
-    "subject": "Candidate Interview Schedule - Senior ML Engineer",
-    "body": "Hi Team,\n\nHere is the interview schedule for the Senior ML Engineer candidate, James Peterson, for tomorrow, Oct 28th.\n\n**Schedule:**\n- **10:00 AM - 11:00 AM:** System Design (Interviewer: Michael Chen)\n- **11:00 AM - 12:00 PM:** Coding / Algorithms (Interviewer: Sarah Jenkins)\n- **12:00 PM - 1:00 PM:** Lunch Break\n- **1:00 PM - 2:00 PM:** ML Depth / Research (Interviewer: Dr. Emily Zhang)\n- **2:00 PM - 2:30 PM:** Culture Fit / Wrap-up (Interviewer: HR)\n\n**Candidate Background:**\nJames has 6 years of experience in NLP and Reinforcement Learning. He previously worked at TechGiant Corp where he led the chatbot team. His GitHub profile shows active contributions to open-source LLM libraries.\n\nResume and portfolio are attached to the calendar invite. Please submit your feedback in the ATS within 24 hours.\n\nThanks,\nRecruiting Team",
+    "sender": "deals@shopping-paradise.com",
+    "subject": "🛍️ Flash Sale: Up to 70% Off Everything! Today Only!",
+    "body": "FLASH SALE ALERT!\n\nEverything must go! We're clearing out our warehouse and passing the savings to YOU!\n\n🔥 Electronics - Up to 70% off\n🔥 Fashion - Buy 2 Get 1 Free\n🔥 Home & Garden - 50% off\n🔥 Sports Equipment - 60% off\n\nFREE SHIPPING on orders over $50!\n\nSale ends tonight at midnight. Don't wait!\n\n[SHOP NOW]\n\nFollow us on Instagram @shoppingparadise for exclusive deals!\n\nUnsubscribe | Contact Us",
     "timestamp": "2023-10-27T15:00:00Z",
     "read": false
   },
   {
     "id": "email_012",
-    "sender": "finance@oceanai.com",
-    "subject": "Expense Reimbursement Policy Update",
-    "body": "All Employees,\n\nEffective November 1st, we are updating our Expense Reimbursement Policy to streamline the approval process and ensure compliance with tax regulations.\n\n**Key Changes:**\n1. **Receipts:** Digital receipts are now mandatory for all expenses over $25 (previously $50).\n2. **Travel:** All flight and hotel bookings must be made through the corporate travel portal (TravelPerk). Bookings made outside the portal will not be reimbursed unless pre-approved.\n3. **Meals:** The daily meal allowance for business travel has been increased to $75 per day.\n4. **Submission Deadline:** Expenses must be submitted within 30 days of the transaction date. Late submissions will require VP approval.\n\nPlease review the full policy document on the intranet. If you have any questions, please contact the Finance department.\n\nThank you,\nFinance Dept",
-    "timestamp": "2023-10-27T15:30:00Z",
+    "sender": "newsletter@productivityhacks.io",
+    "subject": "5 Productivity Tips to 10x Your Output This Week",
+    "body": "Hey there,\n\nWelcome to this week's Productivity Hacks newsletter! Here are 5 actionable tips to supercharge your week:\n\n1. Time Blocking: Schedule your day in 90-minute focus blocks\n2. The 2-Minute Rule: If it takes less than 2 minutes, do it now\n3. Batch Similar Tasks: Group emails, calls, and meetings together\n4. Digital Detox: Turn off notifications for 2 hours daily\n5. Weekly Review: Spend 30 minutes every Friday planning next week\n\nBonus: Download our free productivity planner template!\n\nStay productive,\nThe Productivity Hacks Team\n\nP.S. Reply to this email with your favorite productivity tip!\n\nUnsubscribe | View in browser",
+    "timestamp": "2023-10-27T16:00:00Z",
     "read": true
   },
   {
@@ -105,17 +105,17 @@
   },
   {
     "id": "email_014",
-    "sender": "support@saas-tool.com",
-    "subject": "Invoice #INV-2023-10-001 for October",
-    "body": "Hello,\n\nThis is an automated notification that your invoice for the month of October has been generated.\n\n**Invoice Details:**\n- **Invoice Number:** INV-2023-10-001\n- **Amount:** $499.00\n- **Due Date:** Nov 10, 2023\n- **Status:** Unpaid\n\n**Service Summary:**\n- Enterprise Plan (10 Seats): $400.00\n- Add-on: Advanced Analytics: $99.00\n\nPlease login to your account to view the full invoice and make a payment. If you have set up auto-pay, the amount will be charged to your card on file on the due date.\n\nThank you for your business!\nSaaS Tool Team",
-    "timestamp": "2023-10-27T16:15:00Z",
+    "sender": "phishing@fake-bank.ru",
+    "subject": "URGENT: Your Account Has Been Suspended - Verify Now",
+    "body": "Dear Valued Customer,\n\nYour account has been temporarily suspended due to suspicious activity detected on October 27, 2023.\n\nTo restore access to your account, you must verify your identity immediately by clicking the link below:\n\n>>> VERIFY YOUR ACCOUNT NOW <<<\n\nFailure to verify within 24 hours will result in permanent account closure and loss of all funds.\n\nRequired information:\n- Full name\n- Social Security Number\n- Account number\n- PIN code\n- Mother's maiden name\n\nThank you for your immediate attention to this matter.\n\nSecurity Department\nGlobal Bank Services",
+    "timestamp": "2023-10-27T17:30:00Z",
     "read": false
   },
   {
     "id": "email_015",
     "sender": "ceo@oceanai.com",
     "subject": "Town Hall Meeting - Q3 Results and Future Vision",
-    "body": "Team,\n\nPlease join me for our quarterly Town Hall meeting next Monday at 4 PM in the main auditorium (and streamed via Zoom).\n\n**Agenda:**\n1. **Q3 Financial Results:** We had a strong quarter, exceeding our revenue targets by 15%. I'll share the detailed breakdown.\n2. **Product Updates:** Sarah will give a sneak peek of the upcoming Q4 roadmap.\n3. **Strategic Vision:** I want to talk about where the industry is heading and how OceanAI is positioned to lead the wave of Agentic AI.\n4. **Q&A:** Open floor for any questions you might have.\n\nThis is an exciting time for our company. Your hard work and dedication are what make our success possible. I look forward to seeing you all there.\n\nBest,\nRobert\nCEO, OceanAI",
+    "body": "Team,\n\nPlease join me for our quarterly Town Hall meeting next Monday at 4 PM in the main auditorium (and streamed via Zoom).\n\nAgenda:\n1. Q3 Financial Results: We had a strong quarter, exceeding our revenue targets by 15%. I'll share the detailed breakdown.\n2. Product Updates: Sarah will give a sneak peek of the upcoming Q4 roadmap.\n3. Strategic Vision: I want to talk about where the industry is heading and how OceanAI is positioned to lead the wave of Agentic AI.\n4. Q&A: Open floor for any questions you might have.\n\nThis is an exciting time for our company. Your hard work and dedication are what make our success possible. I look forward to seeing you all there.\n\nBest,\nRobert\nCEO, OceanAI",
     "timestamp": "2023-10-27T17:00:00Z",
     "read": false
   }

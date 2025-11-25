@@ -16,7 +16,8 @@ class Email(BaseModel):
 class PromptConfig(BaseModel):
     id: str
     name: str
-    template: str
+    template: str  # User-facing simple prompt
+    system_template: Optional[str] = None  # Backend detailed prompt (if None, uses template)
     description: str
 
 class Draft(BaseModel):
@@ -34,3 +35,10 @@ class ChatRequest(BaseModel):
 class GenerateDraftRequest(BaseModel):
     email_id: str
     instructions: Optional[str] = None
+
+class ActionItem(BaseModel):
+    task: str
+    deadline: Optional[str] = None
+
+class ActionItemList(BaseModel):
+    items: List[ActionItem]

@@ -13,7 +13,7 @@ def load_mock_data():
         print(f"Warning: Mock data file not found at {DATA_PATH}")
         return
 
-    with open(DATA_PATH, "r") as f:
+    with open(DATA_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
     
     for item in data:
