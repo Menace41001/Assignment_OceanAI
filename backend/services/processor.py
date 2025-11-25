@@ -70,19 +70,22 @@ async def process_inbox():
                         first_word = first_word.strip('"\'.,!?:')
                         email.category = first_word.capitalize()
                 
-            # Extract Action Items
-            action_items = await process_email_with_prompt(
-                email.body, 
-                action_prompt.template, 
-                output_json=True,
-                system_template=action_prompt.system_template
-            )
-            if action_items:
-                if isinstance(action_items, list):
-                    email.action_items = action_items
-                else:
-                    # Handle case where LLM returns a single object instead of list
-                    email.action_items = [action_items]
+            # Extract action items ONLY for To-Do and Important emails
+            if email.category in ["To-Do", "Important"]:
+                action_items = await process_email_with_prompt(
+                    email.body, 
+                    action_prompt.template, 
+                    output_json=True,
+                    system_template=action_prompt.system_template
+                )
+                if action_items:
+                    if isinstance(action_items, list) and len(action_items) > 0:
+                        email.action_items = action_items
+                    else:
+                        email.action_items = []
+            else:
+                # For Newsletter and Spam, no action items
+                email.action_items = []
             
             store.update_email(email)
             print(f"Finished processing {email.id}: category={email.category}")
@@ -145,17 +148,22 @@ async def process_single_email(email_id: str):
                     first_word = first_word.strip('"\'.,!?:')
                     email.category = first_word.capitalize()
 
-    if action_prompt:
-        action_items = await process_email_with_prompt(
-            email.body, 
-            action_prompt.template, 
-            output_json=True,
-            system_template=action_prompt.system_template
-        )
-        if action_items:
-             if isinstance(action_items, list):
-                email.action_items = action_items
-             else:
-                email.action_items = [action_items]
+    # Extract action items ONLY for To-Do and Important emails
+    if email.category in ["To-Do", "Important"]:
+        if action_prompt:
+            action_items = await process_email_with_prompt(
+                email.body, 
+                action_prompt.template, 
+                output_json=True,
+                system_template=action_prompt.system_template
+            )
+            if action_items:
+                if isinstance(action_items, list) and len(action_items) > 0:
+                    email.action_items = action_items
+                else:
+                    email.action_items = []
+    else:
+        # For Newsletter and Spam, no action items
+        email.action_items = []
 
     store.update_email(email)

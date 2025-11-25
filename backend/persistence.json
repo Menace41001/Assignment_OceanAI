@@ -14,7 +14,7 @@
           "deadline": "mid-November"
         },
         {
-          "task": "Make significant changes to backend infrastructure to handle increased token limits and context windows",
+          "task": "Make significant changes to backend infrastructure for LLM integration",
           "deadline": "mid-November"
         },
         {
@@ -22,7 +22,7 @@
           "deadline": "December 1st"
         },
         {
-          "task": "Ensure the data pipeline is robust enough to handle a 10x increase in event volume",
+          "task": "Ensure the data pipeline can handle a 10x increase in event volume",
           "deadline": "December 1st"
         },
         {
@@ -74,7 +74,7 @@
           "deadline": null
         },
         {
-          "task": "Discuss inter-service communication strategy and distributed transactions in the architecture guild meeting.",
+          "task": "Discuss the inter-service communication strategy and distributed transactions in the architecture guild meeting.",
           "deadline": "tomorrow"
         }
       ],
@@ -88,16 +88,7 @@
       "timestamp": "2023-10-27 10:30:00+00:00",
       "read": true,
       "category": "Newsletter",
-      "action_items": [
-        {
-          "task": "Read the blog post on 'How to Fine-tune Llama-2 on your own data'.",
-          "deadline": null
-        },
-        {
-          "task": "Visit the website to read the full stories.",
-          "deadline": null
-        }
-      ],
+      "action_items": [],
       "summary": null
     },
     "email_005": {
@@ -108,12 +99,7 @@
       "timestamp": "2023-10-27 11:00:00+00:00",
       "read": false,
       "category": "Spam",
-      "action_items": [
-        {
-          "task": "Click the link to claim the prize and provide bank account details for immediate transfer.",
-          "deadline": "24 hours"
-        }
-      ],
+      "action_items": [],
       "summary": null
     },
     "email_006": {
@@ -156,10 +142,6 @@
         {
           "task": "Review the pull request for issue FE-402",
           "deadline": null
-        },
-        {
-          "task": "Verify if the fix affects the tablet layout",
-          "deadline": null
         }
       ],
       "summary": null
@@ -172,16 +154,7 @@
       "timestamp": "2023-10-27 12:30:00+00:00",
       "read": false,
       "category": "Newsletter",
-      "action_items": [
-        {
-          "task": "Sign up for a cloud storage plan using code CLOUD50 to get 50% off for the first 6 months.",
-          "deadline": "October 31st"
-        },
-        {
-          "task": "Refer a friend to CloudServices to get 1 month free.",
-          "deadline": null
-        }
-      ],
+      "action_items": [],
       "summary": null
     },
     "email_009": {
@@ -236,28 +209,7 @@
       "timestamp": "2023-10-27 15:00:00+00:00",
       "read": false,
       "category": "Newsletter",
-      "action_items": [
-        {
-          "task": "Shop for electronics with up to 70% off",
-          "deadline": "Tonight at midnight"
-        },
-        {
-          "task": "Shop for fashion items with Buy 2 Get 1 Free offer",
-          "deadline": "Tonight at midnight"
-        },
-        {
-          "task": "Shop for home & garden items with 50% off",
-          "deadline": "Tonight at midnight"
-        },
-        {
-          "task": "Shop for sports equipment with 60% off",
-          "deadline": "Tonight at midnight"
-        },
-        {
-          "task": "Ensure order is over $50 to get free shipping",
-          "deadline": "Tonight at midnight"
-        }
-      ],
+      "action_items": [],
       "summary": null
     },
     "email_012": {
@@ -268,32 +220,7 @@
       "timestamp": "2023-10-27 16:00:00+00:00",
       "read": true,
       "category": "Newsletter",
-      "action_items": [
-        {
-          "task": "Schedule your day in 90-minute focus blocks",
-          "deadline": null
-        },
-        {
-          "task": "If it takes less than 2 minutes, do it now",
-          "deadline": null
-        },
-        {
-          "task": "Group emails, calls, and meetings together",
-          "deadline": null
-        },
-        {
-          "task": "Turn off notifications for 2 hours daily",
-          "deadline": null
-        },
-        {
-          "task": "Spend 30 minutes every Friday planning next week",
-          "deadline": "Every Friday"
-        },
-        {
-          "task": "Download the free productivity planner template",
-          "deadline": null
-        }
-      ],
+      "action_items": [],
       "summary": null
     },
     "email_013": {
@@ -324,12 +251,7 @@
       "timestamp": "2023-10-27 17:30:00+00:00",
       "read": false,
       "category": "Spam",
-      "action_items": [
-        {
-          "task": "Verify your identity by providing full name, Social Security Number, account number, PIN code, and mother's maiden name.",
-          "deadline": "October 28, 2023"
-        }
-      ],
+      "action_items": [],
       "summary": null
     },
     "email_015": {
@@ -343,7 +265,7 @@
       "action_items": [
         {
           "task": "Attend the quarterly Town Hall meeting",
-          "deadline": "next Monday at 4 PM"
+          "deadline": "Next Monday at 4 PM"
         }
       ],
       "summary": null
