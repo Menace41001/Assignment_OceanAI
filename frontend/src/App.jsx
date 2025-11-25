@@ -388,7 +388,7 @@ function InboxView({ emails, selectedEmail, onSelectEmail, onProcess, loading, o
                       ? 'bg-blue-600 text-white rounded-br-none'
                       : 'bg-gray-100 text-gray-800 rounded-bl-none'
                       }`}>
-                      {msg.content}
+                      <div className="whitespace-pre-wrap">{cleanText(msg.content)}</div>
                     </div>
                   </div>
                 ))}

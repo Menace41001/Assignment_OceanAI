@@ -77,16 +77,27 @@ async def chat_endpoint(request: ChatRequest):
     else:
         # Chat with whole inbox
         emails = store.get_all_emails()
-        # Construct a summary context
-        inbox_summary = "Inbox Overview:\n"
-        for email in emails:
-            inbox_summary += f"- From: {email.sender}, Subject: {email.subject}, Category: {email.category or 'Uncategorized'}\n"
-            if email.summary:
-                inbox_summary += f"  Summary: {email.summary}\n"
-            elif len(email.body) < 200:
-                inbox_summary += f"  Body: {email.body}\n"
-            else:
-                inbox_summary += f"  Body Preview: {email.body[:200]}...\n"
+        
+        # Construct a detailed, structured summary
+        inbox_summary = f"Total emails: {len(emails)}\n\n"
+        
+        for i, email in enumerate(emails, 1):
+            inbox_summary += f"Email {i}:\n"
+            inbox_summary += f"From: {email.sender}\n"
+            inbox_summary += f"Subject: {email.subject}\n"
+            inbox_summary += f"Category: {email.category or 'Uncategorized'}\n"
+            inbox_summary += f"Date: {email.timestamp.strftime('%Y-%m-%d %H:%M')}\n"
+            
+            # Add action items if present
+            if email.action_items and len(email.action_items) > 0:
+                inbox_summary += f"Action Items: {len(email.action_items)} tasks\n"
+                for item in email.action_items[:2]:  # Show first 2
+                    inbox_summary += f"  - {item.get('task', 'N/A')}\n"
+            
+            # Add body preview (first 150 chars)
+            body_preview = email.body[:150].replace('\n', ' ')
+            inbox_summary += f"Preview: {body_preview}...\n"
+            inbox_summary += "\n"
         
         response = await chat_with_inbox(inbox_summary, request.query)
         return {"response": response}
