@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
+import os
 from models import Email, PromptConfig, Draft, GenerateDraftRequest
 from services.store import store
 from services.ingestion import load_mock_data
@@ -10,10 +11,17 @@ from models import ChatRequest
 
 app = FastAPI(title="Email Productivity Agent API")
 
+# Get frontend URL from environment or use default
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Allow all origins for dev
+    allow_origins=[
+        "http://localhost:5173",  # Local development
+        FRONTEND_URL,              # Production frontend
+        "https://*.vercel.app",    # All Vercel preview deployments
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -26,6 +34,10 @@ async def startup_event():
 @app.get("/")
 def read_root():
     return {"message": "Email Productivity Agent API is running"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "message": "Email Agent API is running"}
 
 @app.get("/emails", response_model=List[Email])
 def get_emails():

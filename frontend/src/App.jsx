@@ -57,27 +57,21 @@ function App() {
   };
 
   const handleProcess = async () => {
-    setLoading(true);
+    setProcessing(true);
     try {
       await api.post('/process');
 
-      // Poll for updates every 2 seconds for up to 30 seconds
-      let pollCount = 0;
-      const maxPolls = 15;
-      const pollInterval = setInterval(async () => {
-        await fetchEmails();
-        pollCount++;
-        if (pollCount >= maxPolls) {
-          clearInterval(pollInterval);
-          setLoading(false);
-        }
-      }, 2000);
-
-      // Also fetch immediately
+      // Poll for updates every 2 seconds for 1 minute
       await fetchEmails();
+      const pollInterval = setInterval(fetchEmails, 2000);
+      setTimeout(() => {
+        clearInterval(pollInterval);
+        setProcessing(false);
+      }, 60000); // 1 minute = 60000ms
+
     } catch (err) {
-      console.error("Error processing", err);
-      setLoading(false);
+      console.error("Error processing inbox", err);
+      setProcessing(false);
     }
   };
 
