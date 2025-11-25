@@ -65,7 +65,7 @@ function App() {
   };
 
   const handleProcess = async () => {
-    setProcessing(true);
+    setLoading(true);
     try {
       await api.post('/process');
 
@@ -74,12 +74,12 @@ function App() {
       const pollInterval = setInterval(fetchEmails, 2000);
       setTimeout(() => {
         clearInterval(pollInterval);
-        setProcessing(false);
+        setLoading(false);
       }, 60000); // 1 minute = 60000ms
 
     } catch (err) {
       console.error("Error processing inbox", err);
-      setProcessing(false);
+      setLoading(false);
     }
   };
 
